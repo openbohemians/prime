@@ -1,4 +1,9 @@
-prime
-=====
+# Prime
 
-Logical programming in plain language.
+Logical Programming in Plain Language
+
+## About
+
+Prime is a logical programming language in the the heiritage of Prolog.
+
+
