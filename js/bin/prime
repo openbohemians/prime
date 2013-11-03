@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+
+var argv = require('optimist').argv
+var app = require('../lib/eval')
+
+if (argv._.length > 0) {
+  var prime = new app.Prime()
+  prime.run(argv[0])
+} else {
+
+}
+
