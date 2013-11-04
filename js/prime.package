@@ -5,13 +5,15 @@
     "keywords": ["language", "prolog", "logic"],
     "repository": { "type": "git", "url": "git@github.com:openbohemians/prime.git" },
     "author": "Trans <transfire@gmail.com> (http://trans.github.com)",
+    "main": "./prime.js",
+    "bin": {"primt": "./bin/prime"}
     "engines": {
         "node" : "~0.8",
         "npm": "1"
     },
     "dependencies": {
+        "ansi": "~0.2",
         "commander": "~1.0.0",
-        "colors": "~0.6.0-1",
         "prompt": "~0.2.3"
     },
     "devDependencies": {}
