@@ -6,8 +6,8 @@ Logical Programming in Plain Language
 
 Prime is a logical programming language in the the heiritage of Prolog.
 
-Prime has a flexible and open syntax. In contrast to Prolog, Prime is not a 
-a predicate logic. Prime programs are made up of sentences, and sentences are
+In contrast to Prolog, Prime does not use predicate logic. Instead Prime allows
+an open syntax. Prime programs are made up of sentences, and sentences are
 constructed of atoms. These atoms can be either words, numbers
 strings or a collection thereof. Symbols and numbers generally make up the
 bulk of a Prime program's logic, whereas text is used for I/O.
@@ -35,14 +35,30 @@ causual relation, logical IF.
 
 ### Variables
 
-Variable slots can be represented as set of ordered ... using the underscore.
-For example:
+Variable are used in relate commonality between clauses. Variables can be
+desingated as unamed ordered. For example:
 
-    _ is tall : _ is greater than 6 ft in height.
+    _ likes _ : _ is a friend of _.
+
+If the order is not the same we can use numbered slots. 
+
+    _ likes _ : _2_ is a friend of _1_.
 
 Variable slots can also be named.
 
-    [x] is tall : [x] is greater than 6 ft in height.
+    _x_ is tall : _x_ is greater than 6 ft in height.
+
+### Queries
+
+    _ like Mary?
+    => Tom
+
+The quesry is actually returning a list. If the variable slot was named,
+
+    _who_ like Mary?
+    => who: Tom
+
+Then the query returns a map.
 
 ### Lists
 
@@ -76,11 +92,13 @@ NOTE: The syntax for trees is still a work in progress.
 In addition to lists, Prime can work with data trees, including directed graphs,
 in similar fashion.
 
-  [ root' < left' right' ]
-  [ left' > root' < right' ]
-  [ left' right' > root' ]
+    [ root' < left' right' ]
+    [ left' > root' < right' ]
+    [ left' right' > root' ]
 
-All three of these are example are equivalent, pattern matching a binary tree node.
+All three examples are equivalent, each pattern matching a binary tree node.
+
+### Maps
 
 
 ## Implementation
