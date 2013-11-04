@@ -27,28 +27,36 @@ Here is the classic Prolog program translated to Prime.
 
 A clause that ends in a period is taken as a fact.
 
-A clause that ends in a question mark is a query.
+A clause that end in a question mark is a query.
 
-Commas are used to in clauses to relate sub-clauses via logical AND and
-semicolons are used to relate them by logical OR. Colons are used to represent
-causual relation, logical IF.
+Clauses separated by commas are related via logical AND.
+
+Claues separated by semicolons are related via logical OR.
+
+Clauses separated by colons are related via logical IF. These
+are called rules. The define a causual relation. The colon
+is read as `if` or `because`.
 
 ### Variables
 
-Variable are used in relate commonality between clauses. Variables can be
-desingated as unamed ordered. For example:
+Variable are used in relate commonality between clauses.
+
+Variables can be desingated as unamed ordered. For example:
 
     _ likes _ : _ is a friend of _.
 
 If the order is not the same we can use numbered slots. 
 
-    _ likes _ : _2_ is a friend of _1_.
+    _ likes _ : 2' is a friend of 1'.
 
 Variable slots can also be named.
 
-    _x_ is tall : _x_ is greater than 6 ft in height.
+    x' is tall : x' is greater than 6 ft in height.
 
 ### Queries
+
+Queries are used to ask the knowledge base for information. Queries end in a
+question mark.
 
     _ like Mary?
     => Tom
@@ -58,7 +66,8 @@ The quesry is actually returning a list. If the variable slot was named,
     _who_ like Mary?
     => who: Tom
 
-Then the query returns a map.
+Then the query returns a map. Queries of this form a generally used for
+debugging. Sub-queries are used for coding logic (see below).
 
 ### Lists
 
@@ -81,15 +90,40 @@ This makes it possible to also do body/foot pattern matching.
 
     [b* f']
 
-As well as more variaed patterns.
+As well as more varied patterns.
 
     [a' b' m* y' z']
 
+### Maps
+
+Maps are associative array. They map an key to a value. Keys are unique and
+order is insignificant. (NOTE: Prime may perserve order if it proves useful to do so.)
+
+    [a:1 b:2 c:3]
+
+Pattern matching on maps works much like it does for lists.
+
+    [k':v']
+
+This matches any key-value pair.
+
+    [x:v']
+
+This matches value of entry with key `x`. There will be only one.
+
+    [k':x]
+
+And this matches all keys that have value `x`. This will be a list since there
+can be more than one. Querying values with given keys is much more
+efficient than the converse.
+
 ### Trees
 
-NOTE: The syntax for trees is still a work in progress.
+<i>NOTE: The syntax for trees is still a work in progress. One question that still
+needs to be considered is the order of branches --how can it be controlled?
+Does it need to be?</i>
 
-In addition to lists, Prime can work with data trees, including directed graphs,
+In addition to lists, Prime can work with trees, including directed graphs,
 in similar fashion.
 
     [ root' < left' right' ]
@@ -97,14 +131,42 @@ in similar fashion.
     [ left' right' > root' ]
 
 All three examples are equivalent, each pattern matching a binary tree node.
+Nodes can have any number of branches.
 
-### Maps
+    [ root' < a' ]
+    [ root' < a' b' c' d' ]
+
+The branches can though of as a list and matched in the same fashion.
+
+    [ root' < h' t* ]
+
+It is interesting to note that tree with nodes containing only single branches
+are equivalent to linked lists.
+
+
+### Sub-clauses
+
+Clauses can be embedded in other clauses. For short clauses this often makes
+for more concise, and thus easier to read code.
+
+    red car.
+    blue car.
+    (red car) is fast.
+    (blue car) is slow.
+
+Sub-clauses can also for the sub-queries.
+
+    (_ likes Socrates) likes Philosophy.
+
+Which is to say, whomever likes Socrates also likes Philosopy.
+
+<i>NOTE: How is this implemtented? As a rule or as a set of facts? Should the 
+programmer have sopme way to specify which? Maybe a `!` terminator?</i>
 
 
 ## Implementation
 
 Prime uses a *knoweldge tree* to record all facts. Using a tree structure
-makes fact searching very fast, more so by that fact the each branch can
-be searched concurrently, taking advantage of any number of available 
-processors.
+makes fact searching very fast. In addition each branch can be searched
+concurrently, taking advantage of any number of available processors.
 
