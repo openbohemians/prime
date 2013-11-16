@@ -5,15 +5,15 @@ Logical Programming in Plain Language
 
 ## About
 
-Prime is a logical programming language in the the heiritage of Prolog.
+Prime is a *logical programming language* in the heiritage of Prolog.
 
-Here is the classic Prolog program translated to Prime.
+Here is the classic Socrates syllogism translated to Prime.
 
 ```prime
     x' is mortal: x' is human.
     Socrates is human.
     Socrates is mortal?
-    > yes.
+    -> true.
 ```
 
 
@@ -27,11 +27,15 @@ Here is the classic Prolog program translated to Prime.
 
 ## Contribute
 
-Presently Prime is all concpet and very little in the way of implementation.
+<b>The Prime project is seeking a *logical programming enthusiest* with
+strong knowledge of logical langauge implementations to help take Prime to
+the next level.</b>
+
+Presently Prime is all concept and very little in the way of implementation.
 The broad plan is to implement in Javascript/Coffeescript so that Prime can
 be used to write client-side web applications, as well as server-side 
-web applications using Node.js, and then to also implement a faster general
-purpose version in a modern systems language such as D, Go or Rust.
+web applications using Node.js, and then to implement a faster general
+purpose version in a modern systems language such like D, Go or Rust.
 
 If anyone finds Prime of particular interest and have exceptional experience
 in any of the above, there is an opportunity to be a founding developer.
